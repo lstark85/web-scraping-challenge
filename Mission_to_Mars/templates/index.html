@@ -41,7 +41,9 @@
         </br>
         <div class="card">
             <h3>Mars Facts</h3>
-            {{ mars_dict.html_table | safe}}
+            <table class="table table-striped">
+            <h5>{{ mars_dict.cleaned_df | safe}}</h5>
+            </table>
         </div>
     </div>
     <hr>
@@ -51,21 +53,34 @@
         </div>
     </div>
     </br>
-    <div class="row">       
-        {% for hem in mars_dict.hemisphere_images %} 
-        <div class="col-6 border">
-        </br>
-            <div>
-            <img width="512 px" height="512 px" src="{{hem.image_url}}">
+    <div class="container">
+        <div class="row col-12" >
+            <div class="col-md-6">
+                <div class="holder">
+                    <p><h3>{{mars_dict.dict[0]["title"]}}</h3><img src={{mars_dict.dict[0]["img_url"]}} alt= "Cerberus Hemisphere Enhanced" width="500" height="500"></p>
+                </div>
             </div>
-
-            <div>
-            <h4> {{title}} </h4>  
+       
+            <div class="col-md-6">
+                <div class="holder">
+                    <p><h3>{{mars_data.hemi[1]["title"]}}</h3><img src={{mars_data.hemi[1]["img_url"]}} alt="Schiaparelli Hemisphere Enhanced" width="500" height="500"></p>
             </div>
-            
+        </div>  
+    </div>  
+      
+        <div class="row col-12" >
+            <div class="col-md-6">
+                <div class="holder">
+                    <p><h3>{{mars_data.hemi[2]["title"]}}</h3><img src={{mars_data.hemi[2]["img_url"]}} alt= "Cerberus Hemisphere Enhanced" width="500" height="500"></p>
+                </div>  
             </div>
-            {% endfor %}
-    </div> 
+        <div class="col-md-6">
+            <div class="holder">
+                <p><h3>{{mars_data.hemi[3]["title"]}}</h3><img src={{mars_data.hemi[3]["img_url"]}} alt="Schiaparelli Hemisphere Enhanced" width="500" height="500"></p>
+            </div>
+        </div>  
+    </div>
+    </div>
 
     <hr>
     <footer class="footer">

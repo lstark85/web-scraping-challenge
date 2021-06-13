@@ -75,6 +75,7 @@ def scrape_info():
     html_table
     cleaned_df.to_html('table.html')
     
+    
     ### Mars Hemispheres
 
     # Scrape Mars hemisphere title and image
@@ -132,7 +133,7 @@ def scrape_info():
         "news_title" : news_title,
         "news_p" : news_p,
         "featured_image_url" : featured_image_url,
-        "mars_facts" : html_table,
+        "mars_facts" : cleaned_df,
         "hemisphere_images" : hemisphere_image_urls
     }
     # Close the browser after scraping
