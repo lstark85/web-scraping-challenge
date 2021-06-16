@@ -30,9 +30,24 @@ executable_path = {'executable_path': 'chromedriver.exe'}
 browser = Browser('chrome', **executable_path, headless=False)
 
 
+# In[4]:
+
+
+#Dictionary
+# Create dictionary for all info scraped from sources above
+mars_data={
+    "news_title" : [],
+    "news_p" : [],
+    "featured_image_url" : [],
+    "mars_facts" : [],
+    "img_url" : [],
+    "title" : []
+}
+
+
 # ## Nasa Mars News
 
-# In[4]:
+# In[5]:
 
 
 #URL for NASA Mars News
@@ -50,11 +65,13 @@ html = browser.html
 soup = bs(html, 'html.parser')
 
 # Retrieve all elements that has article information
-news_title = soup.find('div', class_='content_title').text
-news_p = soup.find('div', class_='article_teaser_body').text
+news_title = soup.find('div', class_='content_title')
+news_p = soup.find('div', class_='article_teaser_body')
 
-print(news_title)
-print(news_p)
+print(news_title.text)
+print(news_p.text)
+mars_data["news_title"].append(news_title)
+mars_data["news_p"].append(news_p)
 
 
 # ## JPL Mars Space Images - Featured Image
@@ -82,6 +99,7 @@ a = div.find('a', class_='showimg fancybox-thumbs')
 href = a['href']
 featured_image_url = str(space_url) + str(href)
 print(featured_image_url)
+mars_data["featured_image_url"].append(featured_image_url)
 
 
 # In[9]:
@@ -154,7 +172,7 @@ hemisphere_image_urls = []
 section = soup.find('section', id='results-accordian')
 
 #Retrieve the individual "product" info
-div = section('div', class_='description')
+div = section.find_all('div', class_='description')
 
 for product in div:
     #Create dictionary to store title & img url
@@ -162,8 +180,8 @@ for product in div:
 
     #Gets the title by finding the h3 tag
     title = product.find('h3').text
-    dict['title'] = title
-    #print(title)
+    
+    print(title)
 
     #Clicks the link with that title
     browser.links.find_by_partial_text(title).click()
@@ -177,8 +195,10 @@ for product in div:
     img = soup.find('img', class_='wide-image')['src']
     #Adds the the first part of the img url
     img_url = str(hem_url + img)
-    dict['img_url'] = img_url
+    print(img_url)
 
+    mars_data['title'].append(title)
+    mars_data['img_url'].append(img_url)
     hemisphere_image_urls.append(dict)
 
     #Returns & resets to main URL to get next info
@@ -192,45 +212,21 @@ browser.quit()
 # In[16]:
 
 
-hemisphere_image_urls
+mars_data
 
 
 # In[17]:
-
-
-# Create dictionary for all info scraped from sources above
-mars_dict={
-    "news_title" : news_title,
-    "news_p" : news_p,
-    "featured_image_url" : featured_image_url,
-    "mars_facts" : html_table,
-    "hemisphere_images" : hemisphere_image_urls
-}
-
-
-# In[18]:
-
-
-mars_dict
-
-
-# In[19]:
 
 
 conn = 'mongodb://localhost:27017'
 client = pymongo.MongoClient(conn)
 
 
-# In[20]:
+# In[18]:
 
 
 db = client.marsdata_db
 marsdata = db.marsdata
-marsdata.insert_one(mars_dict)
+marsdata.insert_one(mars_data)
 
-
-# In[22]:
-
-
-ipynb-py-convert mission_to_mars.ipynb scrape_mars.py
 

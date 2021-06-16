@@ -27,22 +27,22 @@
     </br>
     <div class="row">
         <div class="col-md-12">
-            <h4>{{mars_dict.news_title}}</h4>
-            <p>{{mars_dict.news_p}}</p>
+            <h4>{{mars_data.news_title}}</h4>
+            <p>{{mars_data.news_p}}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8 border">
             <h2 class=""><u>Featured Mars Image</u></h2> 
             </br>
-            <img class="col-md-12 border" src="{{mars_dict.featured_image_url}}" alt="Featured Mars Image">
+            <img class="col-md-12 border" src="{{mars_data.featured_image_url}}" alt="Featured Mars Image">
         </div>
     <div class="col-md-4">
         </br>
         <div class="card">
             <h3>Mars Facts</h3>
             <table class="table table-striped">
-            <h5>{{ mars_dict.cleaned_df | safe}}</h5>
+            <h5>{{ mars_data.cleaned_df | safe}}</h5>
             </table>
         </div>
     </div>
@@ -57,26 +57,26 @@
         <div class="row col-12" >
             <div class="col-md-6">
                 <div class="holder">
-                    <p><h3>{{mars_dict.dict[0]["title"]}}</h3><img src={{mars_dict.dict[0]["img_url"]}} alt= "Cerberus Hemisphere Enhanced" width="500" height="500"></p>
+                    <p><h3>{{mars_data.title[0]["title"]}}</h3><img src={{mars_data.img_url[0]["img_url"]}} alt= "Cerberus Hemisphere Enhanced" width="500" height="500"></p>
                 </div>
             </div>
-       
+
             <div class="col-md-6">
                 <div class="holder">
-                    <p><h3>{{mars_data.hemi[1]["title"]}}</h3><img src={{mars_data.hemi[1]["img_url"]}} alt="Schiaparelli Hemisphere Enhanced" width="500" height="500"></p>
+                    <p><h3>{{mars_data.title[1]["title"]}}</h3><img src={{mars_data.img_url[1]["img_url"]}} alt="Schiaparelli Hemisphere Enhanced" width="500" height="500"></p>
             </div>
         </div>  
     </div>  
-      
+
         <div class="row col-12" >
             <div class="col-md-6">
                 <div class="holder">
-                    <p><h3>{{mars_data.hemi[2]["title"]}}</h3><img src={{mars_data.hemi[2]["img_url"]}} alt= "Cerberus Hemisphere Enhanced" width="500" height="500"></p>
+                    <p><h3>{{mars_data.title[2]["title"]}}</h3><img src={{mars_data.img_url[2]["img_url"]}} alt= "Cerberus Hemisphere Enhanced" width="500" height="500"></p>
                 </div>  
             </div>
         <div class="col-md-6">
             <div class="holder">
-                <p><h3>{{mars_data.hemi[3]["title"]}}</h3><img src={{mars_data.hemi[3]["img_url"]}} alt="Schiaparelli Hemisphere Enhanced" width="500" height="500"></p>
+                <p><h3>{{mars_data.title[3]["title"]}}</h3><img src={{mars_data.img_url[3]["img_url"]}} alt="Schiaparelli Hemisphere Enhanced" width="500" height="500"></p>
             </div>
         </div>  
     </div>
